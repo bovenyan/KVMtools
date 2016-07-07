@@ -4,7 +4,19 @@
 IMG_DIR=/var/lib/libvirt/images
 IMG_NAME=$1
 
-sudo mkdir $IMG_DIR/$IMG_NAME
-sudo chown bovenyan:bovenyan $IMG_DIR/$IMG_NAME
-virt-install -n $1 -r 2048 --disk path=$IMG_DIR/$IMG_NAME/$1,bus=virtio,size=50,format=qcow2 \
-    -c $2 --connect=qemu:///system --hvm --video=vmvga --os-type=linux
+sudo ubuntu-vm-builder kvm trusty \
+                  --domain $1 \
+                  --destdir $IMG_DIR/$IMG_NAME \
+                  --arch amd64 \
+                  --hostname vmf1 \
+                  --cpus 2 \
+                  --mem 1024 \
+                  --user bovenyan \
+                  --pass By900209 \
+                  --components main,universe \
+                  --addpkg acpid \
+                  --addpkg linux-image-generic \
+                  --addpkg vim \
+                  --addpkg openssh-server \
+                  --addpkg avahi-daemon \
+                  --libvirt qemu:///system ;
