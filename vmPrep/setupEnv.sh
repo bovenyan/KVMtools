@@ -1,3 +1,10 @@
+if [ "$#" -ne 1 ]; then
+    echo "Usage: ./setupEnv.sh <username> <hypervisor IP>"
+    exit
+fi
+mkdir -p $HOME/.ssh
+scp -r $1@$2:/home/$1/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys
+sudo apt-get install software-properties-common python-software-properties
 sudo add-apt-repository ppa:jonathonf/vim -y
 sudo apt-get update
 
