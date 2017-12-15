@@ -1,4 +1,4 @@
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Usage: ./setupEnv.sh <username> <hypervisor IP>"
     exit
 fi
